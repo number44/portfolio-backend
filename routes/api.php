@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\ImageController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\TestController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,6 +19,15 @@ use App\Http\Controllers\NoteController;
 */
 Route::resource('/notes', NoteController::class);
 Route::get("/notes/search/{name}",[NoteController::class,'search']);
+
+Route::get('/images',[ImageController::class , 'index']);
+Route::get('/images/{id}',[ImageController::class , 'show']);
+Route::post('/images',[ImageController::class , 'create']);
+Route::post('/images/{id}',[ImageController::class , 'update']);
+
+Route::delete('/images/{id}',[ImageController::class , 'destroy']);
+
+Route::put('/test', [TestController::class,'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

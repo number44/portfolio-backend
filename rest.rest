@@ -14,3 +14,12 @@ GET http://localhost:8000/api/notes/search/dolor
 
 ###
 GET http://localhost:8000/api/notes
+
+
+###
+PUT  http://localhost:8000/api/test
+content-type: application/json
+
+{
+    "alt" : "test alt"
+}

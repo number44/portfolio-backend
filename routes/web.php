@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Image;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $url = Image::find(1)->url;
+    return view('home',[
+        
+        'url' => $url
+    ]);
 });
 
 Route::get('language/{locale}', function ($locale) {

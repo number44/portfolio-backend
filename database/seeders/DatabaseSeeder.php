@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Image;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Note;
@@ -22,5 +23,6 @@ class DatabaseSeeder extends Seeder
             "password" => bcrypt("123456789")
         ]);
         Note::factory(2)->create();
+        Image::factory(10)->create();
     }
 }

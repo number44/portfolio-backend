@@ -20,7 +20,6 @@ use App\Http\Controllers\TestController;
 Route::resource('/notes', NoteController::class);
 Route::get("/notes/search/{name}",[NoteController::class,'search']);
 
-Route::get('/images',[ImageController::class , 'index']);
 Route::get('/images/{id}',[ImageController::class , 'show']);
 Route::post('/images',[ImageController::class , 'create']);
 Route::post('/images/{id}',[ImageController::class , 'update']);
@@ -28,6 +27,12 @@ Route::post('/images/{id}',[ImageController::class , 'update']);
 Route::delete('/images/{id}',[ImageController::class , 'destroy']);
 
 Route::put('/test', [TestController::class,'store']);
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    
+    Route::get('/images',[ImageController::class , 'index']);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

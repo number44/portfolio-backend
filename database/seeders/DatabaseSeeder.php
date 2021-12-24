@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Image;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         ]);
         Note::factory(2)->create();
         Image::factory(10)->create();
+        Category::factory(7)->create();
     }
 }

@@ -1,1 +1,0 @@
-import{j as r,F as s}from"./index.c16150c4.js";import"./vendor.5519c724.js";const l=({data:e})=>(console.log("data :",e),e?r(s,{children:e&&e.map((n,o)=>r("div",{className:"shadow p-3",children:n.name},o))}):r("h1",{children:"loading ..."}));export{l as default};

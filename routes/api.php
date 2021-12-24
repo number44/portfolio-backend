@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ImageController;
 
 use Illuminate\Http\Request;
@@ -25,13 +26,15 @@ Route::post('/images',[ImageController::class , 'create']);
 Route::post('/images/{id}',[ImageController::class , 'update']);
 
 Route::delete('/images/{id}',[ImageController::class , 'destroy']);
+Route::get('/images',[ImageController::class , 'index']);
 
-Route::put('/test', [TestController::class,'store']);
 
+
+
+Route::get('categories', [CategoryController::class,'index']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     
-    Route::get('/images',[ImageController::class , 'index']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -28,6 +28,11 @@ Route::get('language/{locale}', function ($locale) {
     return redirect()->back();
 });
 
-Route::get('/dashboard' , function(){
+
+// Route::get( '/dashboard/{path?}', function(){
+//     return view( 'dashboard' );
+// } )->where('path', '.*');
+
+Route::get('/dashboard',function(){
     return view('dashboard');
 });

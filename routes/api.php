@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\TestController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,11 @@ use App\Http\Controllers\TestController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+/**
+ * Don`t forget to turn of csrf in in VerifyCSRFVerifyCsrfToken in production
+ */
+
 Route::resource('/notes', NoteController::class);
 Route::get("/notes/search/{name}",[NoteController::class,'search']);
 
@@ -29,9 +35,12 @@ Route::delete('/images/{id}',[ImageController::class , 'destroy']);
 Route::get('/images',[ImageController::class , 'index']);
 
 
+Route::get('/categories', [CategoryController::class,'index']);
+Route::post("/categories", [CategoryController::class,'store']);
+Route::delete("/categories/{id}" , [CategoryController::class , 'destroy']);
 
 
-Route::get('categories', [CategoryController::class,'index']);
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     

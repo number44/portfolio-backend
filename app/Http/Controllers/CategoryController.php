@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Models\Note;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -60,6 +61,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $category = Category::findOrFail($id);
         return Category::destroy($id);
         
     }

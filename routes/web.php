@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Image;
+use App\Models\Note;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/draft', function () {
     $url = Image::find(1)->url;
+
     return view('home',[
         
         'url' => $url
+    ]);
+});
+Route::get('/', function(){
+    $notes = Note::with('category')->get();
+    return view('notes',[
+        "notes" => $notes
     ]);
 });
 

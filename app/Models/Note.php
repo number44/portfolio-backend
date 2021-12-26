@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model
 {
-    protected $fillable = ['name', 'content' , 'slug' ];
+    protected $fillable = ['name', 'content' , 'category_id' ];
     use HasFactory;
     public function category(){
             return $this->belongsTo(Category::class);

@@ -26,6 +26,7 @@ use App\Models\Category;
 
 Route::resource('/notes', NoteController::class);
 Route::get("/notes/search/{name}",[NoteController::class,'search']);
+Route::post('/notes',[NoteController::class,'store']);
 
 Route::get('/images/{id}',[ImageController::class , 'show']);
 Route::post('/images',[ImageController::class , 'create']);

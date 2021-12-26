@@ -18,8 +18,7 @@ class NoteResource extends JsonResource
             "id" => $this->id,
             'name' => $this->name,
             "content" => $this->content,
-            'slug' => $this->slug,
-            'category' => $this->category->name
+            'category' => $this->category->name 
         ];
     }
 }

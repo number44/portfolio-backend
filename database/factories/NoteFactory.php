@@ -15,9 +15,7 @@ class NoteFactory extends Factory
     {
         return [
             "name"=> $this->faker->word(),
-            "slug" => $this->faker->word(),
-            "content" => $this->faker->paragraph(),
-            "category_id" => '1'
+            "content" => $this->faker->paragraph()
         ];
     }
 }

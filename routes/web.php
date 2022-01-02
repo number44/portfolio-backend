@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/',function(){
+    return view('landing');
+});
+
 Route::get('/draft', function () {
     $url = Image::find(1)->url;
 
@@ -23,7 +28,7 @@ Route::get('/draft', function () {
         'url' => $url
     ]);
 });
-Route::get('/', function(){
+Route::get('/xxx', function(){
     $notes = Note::with('category')->get();
     return view('notes',[
         "notes" => $notes

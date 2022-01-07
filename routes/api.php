@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ImageController;
-
+use App\Http\Controllers\LocationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\PepContreoller;
 use App\Http\Controllers\PlacetypeController;
 use App\Http\Controllers\PlaceController;
-
+use App\Http\Controllers\SearchMapController;
 use App\Models\User;
 
 /*
@@ -26,6 +27,7 @@ use App\Models\User;
  * Don`t forget to turn of csrf in in VerifyCSRFVerifyCsrfToken in production
  */
 
+Route::post("/search",[SearchMapController::class , 'search']);
 
 Route::get("/test",function(){
     return User::all();
@@ -42,6 +44,10 @@ Route::delete('/images/{id}',[ImageController::class , 'destroy']);
 Route::get('/images',[ImageController::class , 'index']);
 
 
+
+
+
+
 Route::get('/categories', [CategoryController::class,'index']);
 Route::post("/categories", [CategoryController::class,'store']);
 Route::delete("/categories/{id}" , [CategoryController::class , 'destroy']);
@@ -54,10 +60,15 @@ Route::post('/placetypes/{id}',[PlacetypeController::class,'update']);
 Route::resource(('/places'), PlaceController::class);
 Route::post('/places/{id}',[PlaceController::class,'update']);
 
+Route::resource('/locations', LocationController::class );
+Route::post('/locations/{id}',[LocationController::class,'update']);
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     
 });
+
+Route::get('/pep', [PepContreoller::class,'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

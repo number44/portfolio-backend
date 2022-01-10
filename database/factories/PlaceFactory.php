@@ -14,7 +14,7 @@ class PlaceFactory extends Factory
     public function definition()
     {
         return [
-                "name" =>   $this->faker->word(),
+            "name" =>   $this->faker->word(),
             "ename" =>   $this->faker->word(),
             "lat" => $this->faker->numerify("##,######"),
             "lon" => $this->faker->numerify("##,######"),

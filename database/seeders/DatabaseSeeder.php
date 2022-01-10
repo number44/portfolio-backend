@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Image;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Note;
-use App\Models\Place;
+
+use App\Models\Roomtype;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,9 +22,32 @@ class DatabaseSeeder extends Seeder
             "email" => "admin@dmin.com",
             "password" => bcrypt("123456789")
         ]);
+
+
+
+        Roomtype::factory()->create([
+            "name" => "pokój jednoosobowy",
+            "ename" => "single room",
+        ]);
+
+
+        Roomtype::factory()->create([
+            "name" => "pokój dwuosobowy",
+            "ename" => "two-person room",
+        ]);
+        Roomtype::factory()->create([
+            "name" => "studio",
+            "ename" => "studio",
+        ]);
+        Roomtype::factory()->create([
+            "name" => "mieszkanie",
+            "ename" => "apartment",
+        ]);
+
+
         // Note::factory(2)->create();
-         Image::factory(10)->create();
-        Place::factory(10)->create(10);
+        //  Image::factory(10)->create();
+        // Place::factory(10)->create(10);
          // Category::factory(7)->create();
     }
 }

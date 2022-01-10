@@ -10,6 +10,8 @@ use App\Http\Controllers\PepContreoller;
 use App\Http\Controllers\PlacetypeController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\SearchMapController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomtypeController;
 use App\Models\User;
 
 /*
@@ -25,7 +27,7 @@ use App\Models\User;
 
 /**
  * Don`t forget to turn of csrf in in VerifyCSRFVerifyCsrfToken in production
- */
+*/
 
 Route::post("/search",[SearchMapController::class , 'search']);
 
@@ -63,12 +65,21 @@ Route::post('/places/{id}',[PlaceController::class,'update']);
 Route::resource('/locations', LocationController::class );
 Route::post('/locations/{id}',[LocationController::class,'update']);
 
+Route::resource('/rooms', RoomController::class );
+Route::get('/rooms/search/{name}' , [RoomController::class,'search']);
+Route::post('/rooms/{id}',[RoomController::class,'update']);
+
+
+Route::get('/pep', [PepContreoller::class,'index']);
+
+Route::resource('/roomtypes',RoomtypeController::class);
+Route::post('/roomtypes/{id}',[RoomtypeController::class,'update']);
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     
 });
 
-Route::get('/pep', [PepContreoller::class,'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

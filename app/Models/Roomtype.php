@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Location extends Model
+class Roomtype extends Model
 {
+    protected $fillable = [ 'name', 'ename'  ];
     use HasFactory;
-    protected $fillable = ['name','ename','thumbnail','lon','lat'];
     public function rooms(){
         return $this->hasMany(Room::class);
     }

@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Storage;
 
+use App\Http\Resources\RoomtypeResource;
+use App\Models\Roomtype;
 use Illuminate\Http\Request;
 
-class PepContreoller extends Controller
+class RoomtypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +15,7 @@ class PepContreoller extends Controller
      */
     public function index()
     {
-        $xmlfile = file_get_contents('https://son.rentaroom.pl/pepehousing.xml');
-        $xmlObject = simplexml_load_string($xmlfile);
-        return [
-            'url' => $xmlObject
-        ];
+        return RoomtypeResource::collection(Roomtype::all());
     }
 
     /**
@@ -29,7 +26,7 @@ class PepContreoller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Roomtype::create($request->all());
     }
 
     /**
@@ -40,7 +37,8 @@ class PepContreoller extends Controller
      */
     public function show($id)
     {
-        //
+        return new RoomtypeResource(Roomtype::findOrFail($id)) ;
+
     }
 
     /**
@@ -52,7 +50,9 @@ class PepContreoller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $roomtype = Roomtype::findOrFail($id);
+        $roomtype->update($request->all());
+        return new RoomtypeResource($roomtype);
     }
 
     /**
@@ -63,6 +63,7 @@ class PepContreoller extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Roomtype::destroy($id);
+        
     }
 }

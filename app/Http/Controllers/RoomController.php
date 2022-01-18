@@ -16,8 +16,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        return RoomResource::collection(Room::all()); 
         return Room::all();
+        return RoomResource::collection(Room::all()); 
     }
 
     /**
@@ -38,14 +38,19 @@ class RoomController extends Controller
             Storage::disk('local')->put('public/uploads/thumbnails/' . $name , $file->get());
             $url = url('/') . '/storage/uploads/thumbnails/' . $name;
             $room = new Room();
-            $room->son_id =$request->son_id;
             $room->thumbnail = $url;
+           
+            $room->son_id = $request->son_id;
+            $room->location_id = $request->location_id;
+            $room->roomtype_id = $request->roomtype_id;     
+            $room->district_id = $request->district_id;     
+           
             $room->name = $request->name;
             $room->ename = $request->ename;
+           
+
             $room->price = $request->price;
             $room->availability = $request->availability;
-            $room->location_id = $request->location_id;
-            $room->roomtype_id = $request->roomtype_id;
             
             $room->internet = $request->internet;
             $room->tv = $request->tv;
@@ -55,18 +60,30 @@ class RoomController extends Controller
             $room->elevator = $request->elevator;
             $room->oven = $request->oven;
             $room->equipped_kitchen = $request->equipped_kitchen;
-
-            $room->rooms = $request->rooms;
+            
+            $room->locales = $request->locales;
             $room->beds = $request->beds;
             $room->guests = $request->guests;
             $room->bathrooms = $request->bathrooms;
-
-
+           
             $room->about = $request->about;
             $room->eabout = $request->eabout;
-
+           
             $room->info = $request->info;
             $room->einfo = $request->einfo;
+           
+            $room->b_internet = $request->b_internet;
+            $room->b_water = $request->b_water;
+            $room->b_electricity = $request->b_electricity;
+            $room->b_gas = $request->b_gas;
+            $room->b_taxes = $request->b_taxes;
+           
+            $room->b_costs = $request->b_costs;
+            $room->b_deposit = $request->b_deposit;
+            
+            $room->price_2 = $request->price_2;
+            $room->price_3 = $request->price_3;
+            $room->price_4 = $request->price_4;
 
             $room->save();
             return $room;
@@ -99,13 +116,17 @@ class RoomController extends Controller
             $url = url('/') . '/storage/uploads/thumbnails/' . $name;
             $room->thumbnail = $url;   
         }
-            $room->son_id =$request->son_id;
+             $room->son_id = $request->son_id;
+            $room->location_id = $request->location_id;
+            $room->roomtype_id = $request->roomtype_id;     
+            $room->district_id = $request->district_id;     
+           
             $room->name = $request->name;
             $room->ename = $request->ename;
+           
+
             $room->price = $request->price;
             $room->availability = $request->availability;
-            $room->location_id = $request->location_id;
-            $room->roomtype_id = $request->roomtype_id;
             
             $room->internet = $request->internet;
             $room->tv = $request->tv;
@@ -115,18 +136,45 @@ class RoomController extends Controller
             $room->elevator = $request->elevator;
             $room->oven = $request->oven;
             $room->equipped_kitchen = $request->equipped_kitchen;
-
-            $room->rooms = $request->rooms;
+            
+            $room->locales = $request->locales;
             $room->beds = $request->beds;
             $room->guests = $request->guests;
             $room->bathrooms = $request->bathrooms;
-
-
+           
             $room->about = $request->about;
             $room->eabout = $request->eabout;
-
+           
             $room->info = $request->info;
             $room->einfo = $request->einfo;
+           
+            $room->b_internet = $request->b_internet;
+            $room->b_water = $request->b_water;
+            $room->b_electricity = $request->b_electricity;
+            $room->b_gas = $request->b_gas;
+            $room->b_taxes = $request->b_taxes;
+           
+            $room->b_costs = $request->b_costs;
+            $room->b_deposit = $request->b_deposit;
+            
+            $room->price_2 = $request->price_2;
+            $room->price_3 = $request->price_3;
+            $room->price_4 = $request->price_4;
+
+
+
+	// b_internet: boolean;
+	// b_water: boolean;
+	// b_electricity: boolean;
+	// b_gas: boolean;
+	// b_taxes: boolean;
+	// b_costs: number;
+	// b_deposit: number;
+
+	// price_2: number;
+	// price_3: number;
+	// price_4: number;
+            
 
             $room->save();
             return $room;
@@ -143,6 +191,7 @@ class RoomController extends Controller
      */
     public function show($id)
     {
+        return Room::findOrFail($id);
         return new RoomResource(Room::findOrFail($id));
     }
 
@@ -156,7 +205,12 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $room = Room::findOrFail($id);
+        Storage::delete("/public/uploads/icons/". basename($room->thumbnail));
+        $room->dalete();
+        return [
+            'message' => 'Success'
+        ];
     }
 
         /**
@@ -167,8 +221,8 @@ class RoomController extends Controller
     */
     public function search($name)
     {
-        return  RoomResource::collection(Room::where('name','ilike','%'.$name.'%')->get());
         return  Room::where('name','ilike','%'.$name.'%')->get();
+        return  RoomResource::collection(Room::where('name','ilike','%'.$name.'%')->get());
         // return new NoteResource(Note::where('name', "like",'%'.$name."%" )->get());
     }
 

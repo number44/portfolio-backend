@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Picture extends Model
 {
     use HasFactory;
-    protected $fillable = [ 'name', 'url' , 'alt' , 'size', 'path' ];
-
+     public function room(){
+        return $this->belongsTo(Room::class);
+    }
 }

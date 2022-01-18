@@ -74,7 +74,7 @@ class LocationController extends Controller
             'thumbnail' => 'required',
             'thumbnail.*' => 'mimes:jpeg,jpg,png,svg|max:2048'
         ]);
-         if($request->file('thumbnail')->isValid()){
+         if($request->hasFile('thumbnail') && $request->file('thumbnail')->isValid()){
             Storage::delete("/public/uploads/thumbnails/". basename($location->thumbnail));
             $file = $request->file('thumbnail');
             $name = $request->file('thumbnail')->hashName();

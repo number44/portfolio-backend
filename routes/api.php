@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LocationController;
 use Illuminate\Http\Request;
@@ -12,6 +13,9 @@ use App\Http\Controllers\PepContreoller;
 use App\Http\Controllers\PictureController;
 use App\Http\Controllers\PlacetypeController;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\PriceController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SearchMapController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomtypeController;
@@ -80,22 +84,37 @@ Route::resource('/districts', DistrictController::class);
 Route::post('/districts/{id}', [DistrictController::class, 'update']);
 
 
-// Route::resource('/pictures', PictureController::class);
 
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/logout', [AuthController::class, 'logout']);
 
+Route::get('/files/download/{id}', [FileController::class, 'download']);
+Route::resource("/files", FileController::class);
+
+Route::resource('/prices', PriceController::class);
+Route::post('/prices/{id}', [PriceController::class, 'update']);
+
+Route::resource('/pictures', PictureController::class);
+Route::resource('/rooms', RoomController::class);
+
+
+Route::resource('/reservations', ReservationController::class);
+Route::post('/reservations/{id}', [ReservationController::class, 'update']);
+
+
+Route::resource('/policies', PolicyController::class);
+Route::post('/policies/{id}', [PolicyController::class, 'update']);
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/auth/users', [AuthController::class, 'index']);
-    Route::get('/pictures', [PictureController::class, 'index']);
-    Route::resource('/rooms', RoomController::class);
-
-    // return $request->user();
+    Route::get('/me', [AuthController::class, 'me']);
 });
+
+
+
 
 
 

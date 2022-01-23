@@ -16,21 +16,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/',function(){
+Route::get('/', function () {
     return view('landing');
 });
 
 Route::get('/draft', function () {
-    $url = Image::find(1)->url;
 
-    return view('home',[
-        
-        'url' => $url
+    return view('home', [
+
+        'url' => '$url'
     ]);
 });
-Route::get('/xxx', function(){
+Route::get('/xxx', function () {
     $notes = Note::with('category')->get();
-    return view('notes',[
+    return view('notes', [
         "notes" => $notes
     ]);
 });
@@ -46,6 +45,6 @@ Route::get('language/{locale}', function ($locale) {
 //     return view( 'dashboard' );
 // } )->where('path', '.*');
 
-Route::get('/dashboard',function(){
+Route::get('/dashboard', function () {
     return view('dashboard');
 });

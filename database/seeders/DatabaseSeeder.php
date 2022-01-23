@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\District;
 use App\Models\Location;
+use App\Models\Policy;
+use App\Models\Price;
+use App\Models\Reservation;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -21,8 +24,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $user = User::factory()->create([
             "name" => "admin",
-            "email" => "admin@dmin.com",
-            "password" => bcrypt("123456789")
+            "email" => "admin@admin.com",
+            "password" => bcrypt("1234")
         ]);
 
 
@@ -68,6 +71,20 @@ class DatabaseSeeder extends Seeder
             "lon" => '12.4829321'
         ]);
 
+        Price::factory()->create([
+            "a1" => 1,
+            "a2" => 2,
+            "b1" => 2,
+            "b2" => 6,
+            "c1" => 6,
+            "c2" => 12,
+
+        ]);
+        Policy::factory()->create([
+            "text" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, tempora recusandae quidem possimus placeat dicta fugiat obcaecati ipsa maiores repudiandae harum culpa expedita animi consectetur? Voluptate pariatur ad aliquid ipsum.",
+            "etext" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, tempora recusandae quidem possimus placeat dicta fugiat obcaecati ipsa maiores repudiandae harum culpa expedita animi consectetur? Voluptate pariatur ad aliquid ipsum."
+
+        ]);
 
         // Note::factory(2)->create();
         //  Image::factory(10)->create();

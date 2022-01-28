@@ -67,6 +67,11 @@ class DatabaseSeeder extends Seeder
             "name" => 'tarninowa 1',
             "ename" => 'tarninowa 1',
             "thumbnail" => 'https://images.pexels.com/photos/7224424/pexels-photo-7224424.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            "thumbnail_xs" => 'https://images.pexels.com/photos/7224424/pexels-photo-7224424.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            "thumbnail_sm" => 'https://images.pexels.com/photos/7224424/pexels-photo-7224424.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            "thumbnail_md" => 'https://images.pexels.com/photos/7224424/pexels-photo-7224424.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            "thumbnail_lg" => 'https://images.pexels.com/photos/7224424/pexels-photo-7224424.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+
             "lat" => '41.8933203',
             "lon" => '12.4829321'
         ]);

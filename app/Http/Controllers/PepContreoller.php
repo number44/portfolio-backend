@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Room;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
@@ -52,7 +54,8 @@ class PepContreoller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $room = Room::findOrFail($id);
+        return $room;
     }
 
     /**

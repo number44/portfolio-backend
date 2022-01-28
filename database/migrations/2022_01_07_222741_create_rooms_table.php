@@ -24,6 +24,10 @@ class CreateRoomsTable extends Migration
             $table->string('ename')->nullable();
 
             $table->string('thumbnail');
+            $table->string('thumbnail_xs');
+            $table->string('thumbnail_sm');
+            $table->string('thumbnail_md');
+            $table->string('thumbnail_lg');
 
 
             $table->integer('son_id')->nullable();

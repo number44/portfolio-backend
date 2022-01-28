@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
+Route::get('/m2m3', function () {
     return view('landing');
 });
 
-Route::get('/draft', function () {
+Route::get('/xx', function () {
 
     return view('home', [
 
@@ -34,6 +34,8 @@ Route::get('/xxx', function () {
     ]);
 });
 
+
+
 Route::get('language/{locale}', function ($locale) {
     app()->setLocale($locale);
     session()->put('locale', $locale);
@@ -45,6 +47,6 @@ Route::get('language/{locale}', function ($locale) {
 //     return view( 'dashboard' );
 // } )->where('path', '.*');
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 });

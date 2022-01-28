@@ -18,6 +18,14 @@ class CreateLocationsTable extends Migration
             $table->string('name');
             $table->string('ename')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->string('thumbnail_xs');
+            $table->string('thumbnail_sm');
+            $table->string('thumbnail_md');
+            $table->string('thumbnail_lg');
+
+
+
+
             $table->decimal('lon', 10, 7)->nullable();
             $table->decimal('lat', 10, 7)->nullable();
             $table->timestamps();

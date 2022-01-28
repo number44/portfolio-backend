@@ -19,6 +19,8 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SearchMapController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomtypeController;
+use App\Http\Controllers\MediaController;
+
 use App\Models\User;
 
 /*
@@ -77,6 +79,8 @@ Route::post('/rooms/{id}', [RoomController::class, 'update']);
 
 
 Route::get('/pep', [PepContreoller::class, 'index']);
+Route::post('/pep/{id}', [PepContreoller::class, 'update']);
+
 
 Route::resource('/roomtypes', RoomtypeController::class);
 Route::post('/roomtypes/{id}', [RoomtypeController::class, 'update']);
@@ -106,6 +110,9 @@ Route::post('/reservations/{id}', [ReservationController::class, 'update']);
 
 Route::resource('/policies', PolicyController::class);
 Route::post('/policies/{id}', [PolicyController::class, 'update']);
+
+Route::resource('/media', MediaController::class);
+
 
 
 Route::middleware(['auth:sanctum'])->group(function () {

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\Facades\Image;
 
 use App\Http\Resources\RoomResource;
 use App\Models\Room;
@@ -36,52 +35,15 @@ class RoomController extends Controller
             'thumbnail' => 'required',
             'thumbnail.*' => 'mimes:jpeg,jpg,png,svg|max:2048'
         ]);
-
         if ($request->file('thumbnail')->isValid()) {
             $file = $request->file('thumbnail');
             $name = $request->file('thumbnail')->hashName();
-            $nameWebp = pathinfo($name, PATHINFO_FILENAME) . '.webp';
-
             Storage::disk('local')->put('public/uploads/thumbnails/' . $name, $file->get());
             $url = url('/') . '/storage/uploads/thumbnails/' . $name;
             $room = new Room();
             $room->thumbnail = $url;
 
 
-            $imgFile = Image::make($file->getRealPath());
-            $imgFile->backup();
-
-            $img_xs = $imgFile->resize(150, 150, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('webp')->encode('webp')->save();
-            Storage::disk('local')->put('public/uploads/thumbnails/' . 'xs' . '/'  . $nameWebp, $img_xs);
-            $url_xs = url('/')  . '/storage/uploads/thumbnails/' . 'xs' . '/'   . $nameWebp;
-            $room->thumbnail_xs = $url_xs;
-            $imgFile->reset();
-
-            $img_sm = $imgFile->resize(150, 150, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('webp')->encode('webp')->save();
-            Storage::disk('local')->put('public/uploads/thumbnails/' . 'sm' . '/'  . $nameWebp, $img_sm);
-            $url_sm = url('/')  . '/storage/uploads/thumbnails/' . 'sm' . '/'   . $nameWebp;
-            $room->thumbnail_sm = $url_sm;
-            $imgFile->reset();
-
-            $img_md = $imgFile->resize(150, 150, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('webp')->encode('webp')->save();
-            Storage::disk('local')->put('public/uploads/thumbnails/' . 'md' . '/'  . $nameWebp, $img_md);
-            $url_md = url('/')  . '/storage/uploads/thumbnails/' . 'md' . '/'   . $nameWebp;
-            $room->thumbnail_md = $url_md;
-            $imgFile->reset();
-
-            $img_lg = $imgFile->resize(150, 150, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('webp')->encode('webp')->save();
-            Storage::disk('local')->put('public/uploads/thumbnails/' . 'lg' . '/'  . $nameWebp, $img_lg);
-            $url_lg = url('/')  . '/storage/uploads/thumbnails/' . 'lg' . '/'   . $nameWebp;
-            $room->thumbnail_lg = $url_lg;
-            $imgFile->reset();
 
             $room->son_id = $request->son_id;
             $room->location_id = $request->location_id;
@@ -150,59 +112,14 @@ class RoomController extends Controller
         $room = Room::findOrFail($id);
 
         if ($request->hasFile('thumbnail') &&  $request->file('thumbnail')->isValid()) {
-
-            Storage::delete("/public/uploads/thumbnails/" . basename($room->thumbnail));
-
-            Storage::delete('public/uploads/thumbnails/' . 'xs' . '/ ' . basename($room->thumbnail_xs));
-            Storage::delete('public/uploads/thumbnails/' . 'sm' . '/ ' . basename($room->thumbnail_xs));
-            Storage::delete('public/uploads/thumbnails/' . 'md' . '/ ' . basename($room->thumbnail_xs));
-            Storage::delete('public/uploads/thumbnails/' . 'lg' . '/ ' . basename($room->thumbnail_xs));
-
-
-
-
             $file = $request->file('thumbnail');
             $name = $request->file('thumbnail')->hashName();
-            $nameWebp = pathinfo($name, PATHINFO_FILENAME) . '.webp';
+
+            Storage::delete("/public/uploads/icons/" . basename($room->thumbnail));
 
             Storage::disk('local')->put('public/uploads/thumbnails/' . $name, $file->get());
             $url = url('/') . '/storage/uploads/thumbnails/' . $name;
             $room->thumbnail = $url;
-
-            $imgFile = Image::make($file->getRealPath());
-            $imgFile->backup();
-
-            $img_xs = $imgFile->resize(150, 150, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('webp')->encode('webp')->save();
-            Storage::disk('local')->put('public/uploads/thumbnails/' . 'xs' . '/'  . $nameWebp, $img_xs);
-            $url_xs = url('/')  . '/storage/uploads/thumbnails/' . 'xs' . '/'   . $nameWebp;
-            $room->thumbnail_xs = $url_xs;
-            $imgFile->reset();
-
-            $img_sm = $imgFile->resize(300, 300, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('webp')->encode('webp')->save();
-            Storage::disk('local')->put('public/uploads/thumbnails/' . 'sm' . '/'  . $nameWebp, $img_sm);
-            $url_sm = url('/')  . '/storage/uploads/thumbnails/' . 'sm' . '/'   . $nameWebp;
-            $room->thumbnail_sm = $url_sm;
-            $imgFile->reset();
-
-            $img_md = $imgFile->resize(640, 640, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('webp')->encode('webp')->save();
-            Storage::disk('local')->put('public/uploads/thumbnails/' . 'md' . '/'  . $nameWebp, $img_md);
-            $url_md = url('/')  . '/storage/uploads/thumbnails/' . 'md' . '/'   . $nameWebp;
-            $room->thumbnail_md = $url_md;
-            $imgFile->reset();
-
-            $img_lg = $imgFile->resize(1024, 1024, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('webp')->encode('webp')->save();
-            Storage::disk('local')->put('public/uploads/thumbnails/' . 'lg' . '/'  . $nameWebp, $img_lg);
-            $url_lg = url('/')  . '/storage/uploads/thumbnails/' . 'lg' . '/'   . $nameWebp;
-            $room->thumbnail_lg = $url_lg;
-            $imgFile->reset();
         }
         $room->son_id = $request->son_id;
         $room->location_id = $request->location_id;
@@ -294,15 +211,8 @@ class RoomController extends Controller
     public function destroy($id)
     {
         $room = Room::findOrFail($id);
-
-        Storage::delete("/public/uploads/thumbnails/" . basename($room->thumbnail));
-
-        Storage::delete('public/uploads/thumbnails/' . 'xs' . '/' . basename($room->thumbnail_xs));
-        Storage::delete('public/uploads/thumbnails/' . 'sm' . '/' . basename($room->thumbnail_xs));
-        Storage::delete('public/uploads/thumbnails/' . 'md' . '/' . basename($room->thumbnail_xs));
-        Storage::delete('public/uploads/thumbnails/' . 'lg' . '/' . basename($room->thumbnail_xs));
-
-        $room->delete();
+        Storage::delete("/public/uploads/icons/" . basename($room->thumbnail));
+        $room->dalete();
         return [
             'message' => 'Success'
         ];
